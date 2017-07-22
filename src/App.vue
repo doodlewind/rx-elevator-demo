@@ -2,7 +2,7 @@
   <div>
     <div v-for="i in (0, 10)" :key="i">
       <span>{{11 - i}}</span>
-      <button @click="call('down', 11 - i)">↓</button>
+      <button @click="command('down', 11 - i)">↓</button>
     </div>
     <hr/>
     <div>F{{currentFloor}}</div>
@@ -23,7 +23,7 @@ export default {
     return { currentFloor: 1 }
   },
   methods: {
-    call (direction, target) {
+    command (direction, target) {
       emitter.emit('click', {
         direction,
         target,
