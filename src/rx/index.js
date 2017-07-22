@@ -6,8 +6,8 @@ export function getStream (emitter, type) {
     .switchMap(({ target, curr }) => {
       const up = Observable
         .interval(1000)
-        .map(x => x + 1)
-        .take(target)
+        .map(x => x + curr)
+        .take(target + 1 - curr)
       const down = Observable
         .interval(1000)
         .map(x => target - x)
