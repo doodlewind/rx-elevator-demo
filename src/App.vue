@@ -1,0 +1,35 @@
+<template>
+  <div>
+    <div v-for="i in (0, 10)" :key="i">
+      <span>{{11 - i}}</span>
+      <button @click="call('down', 11 - i)">↓</button>
+    </div>
+    <hr/>
+    <div>F{{currentFloor}}</div>
+  </div>
+</template>
+
+<script>
+import EventEmitter from 'events'
+import { getStream } from './rx'
+const emitter = new EventEmitter()
+
+export default {
+  created () {
+    const stream = getStream(emitter, 'click')
+    stream.subscribe(val => this.currentFloor = val)
+  },
+  data () {
+    return { currentFloor: 1 }
+  },
+  methods: {
+    call (direction, target) {
+      emitter.emit('click', {
+        direction,
+        target,
+        curr: this.currentFloor
+      })
+    }
+  }
+}
+</script>
