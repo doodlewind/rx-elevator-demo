@@ -6,23 +6,26 @@ export function getStream (emitter, type) {
     .switchMap(({ floors, targetFloor, currFloor, currDirection }) => {
       console.log(floors)
       console.log(currFloor, currDirection)
+      const baseFloor = currFloor
 
-      if (targetFloor >= currFloor) {
+      if (targetFloor >= baseFloor) {
         const up = Observable
           .interval(1000)
-          .map(x => {
+          .map(count => {
+            const newFloor = count + baseFloor
             return {
-              floor: x + currFloor,
-              direction: 'up'
+              floor: newFloor,
+              direction: newFloor === targetFloor ? 'stop' : 'up'
             }
           })
-          .take(targetFloor + 1 - currFloor)
+          .take(targetFloor + 1 - baseFloor)
         const down = Observable
           .interval(1000)
-          .map(x => {
+          .map(count => {
+            const newFloor = targetFloor - count
             return {
-              floor: targetFloor - x,
-              direction: 'down'
+              floor: newFloor,
+              direction: newFloor !== 1 ? 'down' : 'stop'
             }
           })
           .take(targetFloor)
@@ -30,13 +33,14 @@ export function getStream (emitter, type) {
       } else {
         return Observable
           .interval(1000)
-          .map(x => {
+          .map(count => {
+            const newFloor = baseFloor - count
             return {
-              floor: currFloor - x,
-              direction: currFloor !== 1 ? 'down' : 'stop'
+              floor: newFloor,
+              direction: newFloor !== 1 ? 'down' : 'stop'
             }
           })
-          .take(currFloor)
+          .take(baseFloor)
       }
     })
 }
