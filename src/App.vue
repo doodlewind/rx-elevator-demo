@@ -2,12 +2,12 @@
   <div>
     <div v-for="(floor, i) in floors" :key="i">
       <span>{{floors.length - i}}</span>
-      <button @click="command('down', floors.length + 1 - i, i)">↓</button>
+      <button @click="command('down', floors.length - i, i)">↓</button>
       <span :style="{color: floor.up ? 'red' : 'white'}">↑</span>
       <span :style="{color: floor.down ? 'red' : 'white'}">↓</span>
     </div>
     <hr/>
-    <div>F{{curr.floor}} - {{curr.state}}</div>
+    <div>F{{curr.floor}} - {{curr.direction}}</div>
   </div>
 </template>
 
@@ -20,7 +20,10 @@ const emitter = new EventEmitter()
 export default {
   created () {
     const stream = getStream(emitter, 'click')
-    stream.subscribe(val => this.curr.floor = val)
+    stream.subscribe(({ floor, direction }) => {
+      this.curr.floor = floor
+      this.curr.direction = direction
+    })
   },
   data () {
     return {
@@ -38,7 +41,7 @@ export default {
       ],
       curr: {
         floor: 1,
-        state: 'stop'
+        direction: 'stop'
       }
     }
   },

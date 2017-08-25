@@ -7,17 +7,26 @@ export function getStream (emitter, type) {
       if (targetFloor >= currFloor) {
         const up = Observable
           .interval(1000)
-          .map(x => x + currFloor)
+          .map(x => ({
+            floor: x + currFloor,
+            direction: 'up'
+          }))
           .take(targetFloor + 1 - currFloor)
         const down = Observable
           .interval(1000)
-          .map(x => targetFloor - x)
+          .map(x => ({
+            floor: targetFloor - x,
+            direction: 'down'
+          }))
           .take(targetFloor)
         return up.concat(down)
       } else {
         return Observable
           .interval(1000)
-          .map(x => currFloor - x)
+          .map(x => ({
+            floor: currFloor - x,
+            direction: 'down'
+          }))
           .take(currFloor)
       }
     })
