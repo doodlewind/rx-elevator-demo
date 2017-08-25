@@ -23,6 +23,10 @@ export default {
     stream.subscribe(({ floor, direction }) => {
       this.curr.floor = floor
       this.curr.direction = direction
+
+      const index = this.floors.length - floor
+      const currFloor = this.floors[index]
+      Vue.set(currFloor, direction, false)
     })
   },
   data () {
