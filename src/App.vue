@@ -53,11 +53,12 @@ export default {
     command (direction, targetFloor, index) {
       const currFloor = this.floors[index]
       Vue.set(currFloor, direction, !currFloor[direction])
-      // console.log(direction, floor)
+
       emitter.emit('click', {
-        direction,
+        floors: this.floors,
         targetFloor,
-        currFloor: this.curr.floor
+        currFloor: this.curr.floor,
+        currDirection: this.curr.direction
       })
     }
   }
