@@ -26,7 +26,12 @@ export default {
 
       const index = this.floors.length - floor
       const currFloor = this.floors[index]
-      Vue.set(currFloor, direction, false)
+      if (direction !== 'stop') {
+        Vue.set(currFloor, direction, false)
+      } else {
+        Vue.set(currFloor, 'up', false)
+        Vue.set(currFloor, 'down', false)
+      }
     })
   },
   data () {
