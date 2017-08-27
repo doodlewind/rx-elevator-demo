@@ -23,6 +23,10 @@ export default {
     stream.subscribe(({ floor, direction }) => {
       this.curr.floor = floor
       this.curr.direction = direction
+
+      const index = this.floors.length - floor
+      const currFloor = this.floors[index]
+      Vue.set(currFloor, direction, false)
     })
   },
   data () {
@@ -49,10 +53,12 @@ export default {
     command (direction, targetFloor, index) {
       const currFloor = this.floors[index]
       Vue.set(currFloor, direction, !currFloor[direction])
+
       emitter.emit('click', {
-        direction,
+        floors: this.floors,
         targetFloor,
-        currFloor: this.curr.floor
+        currFloor: this.curr.floor,
+        currDirection: this.curr.direction
       })
     }
   }

@@ -15,7 +15,6 @@ const entry = {
   step2: './src/step2',
   step3: './src/step3',
   step4: './src/step4',
-  step5: './src/step5',
   final: './src/final',
   vendor: ['vue', 'rxjs']
 }
