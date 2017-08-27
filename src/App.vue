@@ -55,14 +55,15 @@ export default {
   methods: {
     command (direction, targetFloor, index) {
       const currFloor = this.floors[index]
-      Vue.set(currFloor, direction, !currFloor[direction])
-
-      emitter.emit('click', {
-        floors: this.floors,
-        targetFloor,
-        currFloor: this.currFloor,
-        currDirection: this.currDirection
-      })
+      if (!currFloor[direction]) {
+        Vue.set(currFloor, direction, true)
+        emitter.emit('click', {
+          floors: this.floors,
+          targetFloor,
+          currFloor: this.currFloor,
+          currDirection: this.currDirection
+        })
+      }
     }
   },
   watch: {
