@@ -7,7 +7,7 @@
       <span :style="{color: floor.down ? 'red' : 'white'}">↓</span>
     </div>
     <hr/>
-    <div>F{{curr.floor}} - {{curr.direction}}</div>
+    <div>F{{currFloor}} - {{currDirection}}</div>
   </div>
 </template>
 
@@ -21,8 +21,8 @@ export default {
   created () {
     const stream = getStream(emitter, 'click')
     stream.subscribe(({ floor, direction }) => {
-      this.curr.floor = floor
-      this.curr.direction = direction
+      this.currFloor = floor
+      this.currDirection = direction
 
       const index = this.floors.length - floor
       const currFloor = this.floors[index]
@@ -48,10 +48,8 @@ export default {
         { up: false, down: false },
         { up: false, down: false }
       ],
-      curr: {
-        floor: 1,
-        direction: 'stop'
-      }
+      currFloor: 1,
+      currDirection: 'stop'
     }
   },
   methods: {
@@ -62,9 +60,21 @@ export default {
       emitter.emit('click', {
         floors: this.floors,
         targetFloor,
-        currFloor: this.curr.floor,
-        currDirection: this.curr.direction
+        currFloor: this.currFloor,
+        currDirection: this.currDirection
       })
+    }
+  },
+  watch: {
+    currFloor (newFloor) {
+      if (newFloor === 1) {
+        emitter.emit('click', {
+          floors: this.floors,
+          targetFloor: 10,
+          currFloor: this.currFloor,
+          currDirection: this.currDirection
+        })
+      }
     }
   }
 }
