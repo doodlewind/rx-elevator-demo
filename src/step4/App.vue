@@ -7,7 +7,7 @@
       <span :style="{color: floor.down ? 'red' : 'white'}">↓</span>
     </div>
     <hr/>
-    <div>F{{currFloor}} - {{currDirection}}</div>
+    <div>F{{curr.floor}} - {{curr.direction}}</div>
   </div>
 </template>
 
@@ -21,17 +21,8 @@ export default {
   created () {
     const stream = getStream(emitter, 'click')
     stream.subscribe(({ floor, direction }) => {
-      this.currFloor = floor
-      this.currDirection = direction
-
-      const index = this.floors.length - floor
-      const currFloor = this.floors[index]
-      if (direction !== 'stop') {
-        Vue.set(currFloor, direction, false)
-      } else {
-        Vue.set(currFloor, 'up', false)
-        Vue.set(currFloor, 'down', false)
-      }
+      this.curr.floor = floor
+      this.curr.direction = direction
     })
   },
   data () {
@@ -48,34 +39,21 @@ export default {
         { up: false, down: false },
         { up: false, down: false }
       ],
-      currFloor: 1,
-      currDirection: 'stop'
+      curr: {
+        floor: 1,
+        direction: 'stop'
+      }
     }
   },
   methods: {
     command (direction, targetFloor, index) {
       const currFloor = this.floors[index]
-      if (!currFloor[direction]) {
-        Vue.set(currFloor, direction, true)
-        emitter.emit('click', {
-          floors: this.floors,
-          targetFloor,
-          currFloor: this.currFloor,
-          currDirection: this.currDirection
-        })
-      }
-    }
-  },
-  watch: {
-    currFloor (newFloor) {
-      if (newFloor === 1) {
-        emitter.emit('click', {
-          floors: this.floors,
-          targetFloor: 10,
-          currFloor: this.currFloor,
-          currDirection: this.currDirection
-        })
-      }
+      Vue.set(currFloor, direction, !currFloor[direction])
+      emitter.emit('click', {
+        direction,
+        targetFloor,
+        currFloor: this.curr.floor
+      })
     }
   }
 }

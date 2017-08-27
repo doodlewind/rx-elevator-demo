@@ -11,6 +11,11 @@ const htmlPath = path.join(process.cwd(), './dist')
 // 需新建 foo 页面时，在此添加 foo: './src/foo.js'
 // 并新建 src/foo.js 与 src/templates/foo.html
 const entry = {
+  step1: './src/step1',
+  step2: './src/step2',
+  step3: './src/step3',
+  step4: './src/step4',
+  step5: './src/step5',
   final: './src/final',
   vendor: ['vue', 'rxjs']
 }
