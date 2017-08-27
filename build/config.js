@@ -39,10 +39,7 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: utils.getStyleLoaders(isProduction)
-        }
+        loader: 'vue-loader'
       },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       {

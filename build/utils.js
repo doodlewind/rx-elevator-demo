@@ -1,11 +1,5 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-
-const stylConfig = {
-  use: ['css-loader', 'stylus-loader'],
-  fallback: 'vue-style-loader'
-}
 
 module.exports = {
   generateTemplates: function (entry, htmlPath, isProduction) {
@@ -22,20 +16,5 @@ module.exports = {
       }
     })
     return plugins
-  },
-  getStyleLoaders: function (isProduction) {
-    if (!isProduction) {
-      return {
-        styl: 'vue-style-loader!css-loader!stylus-loader'
-      }
-    }
-    return {
-      stylus: ExtractTextPlugin.extract(stylConfig),
-      styl: ExtractTextPlugin.extract(stylConfig),
-      css: ExtractTextPlugin.extract({
-        use: 'css-loader',
-        fallback: 'vue-style-loader'
-      })
-    }
   }
 }
