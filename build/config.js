@@ -1,18 +1,18 @@
-var path = require('path')
-var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var rm = require('rimraf')
-var utils = require('./utils')
+const path = require('path')
+const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const rm = require('rimraf')
+const utils = require('./utils')
 
-var isProduction = process.env.NODE_ENV === 'production'
-var bundlePath = path.join(process.cwd(), './dist')
-var htmlPath = path.join(process.cwd(), './pages')
+const isProduction = process.env.NODE_ENV === 'production'
+const bundlePath = path.join(process.cwd(), './dist')
+const htmlPath = path.join(process.cwd(), './dist')
 
 // 需新建 foo 页面时，在此添加 foo: './src/foo.js'
 // 并新建 src/foo.js 与 src/templates/foo.html
-var entry = {
-  index: './src/index.js',
-  vendor: ['vue']
+const entry = {
+  final: './src/final',
+  vendor: ['vue', 'rxjs']
 }
 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: bundlePath,
-    publicPath: '/dist/'
+    publicPath: './'
   },
   plugins: [
     new ExtractTextPlugin({
@@ -61,17 +61,7 @@ module.exports = {
     alias: { 'vue$': 'vue/dist/vue.runtime.js' }
   },
   performance: { hints: false },
-  devtool: '#eval-source-map',
-  devServer: {
-    contentBase: path.join(process.cwd(), './pages'),
-    compress: true,
-    port: 9000,
-    noInfo: true,
-    // 代理后端接口
-    proxy: {
-      // '/api': { target: 'http://backend-address/' }
-    }
-  }
+  devtool: '#eval-source-map'
 }
 
 rm.sync(path.join(bundlePath, './*'))
@@ -83,7 +73,7 @@ if (isProduction) {
       'process.env': { NODE_ENV: '"production"' }
     }),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
+      sourceMap: false,
       compress: { warnings: false }
     }),
     new webpack.LoaderOptionsPlugin({ minimize: true })

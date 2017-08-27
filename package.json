@@ -1,13 +1,10 @@
 {
   "dependencies": {
     "rxjs": "^5.4.2",
-    "rxjs-es": "^5.0.0-beta.12",
     "vue": "^2.3.4"
   },
   "scripts": {
-    "dev-local": "cross-env NODE_ENV=development webpack --config build/config.js --watch --hide-modules",
-    "pre-server": "cross-env NODE_ENV=development webpack --config build/config.js --hide-modules",
-    "dev": "npm run pre-server && webpack-dev-server --config build/config.js --hot --inline  --host 0.0.0.0",
+    "dev": "cross-env NODE_ENV=development webpack --config build/config.js --watch --hide-modules",
     "build": "cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules"
   },
   "devDependencies": {
@@ -28,13 +25,12 @@
     "vue-hot-reload-api": "^2.0.11",
     "vue-loader": "^10.0.0",
     "vue-template-compiler": "^2.1.0",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.1"
+    "webpack": "^2.2.1"
   },
-  "description": "vue production scaffold",
-  "keywords": [],
-  "name": "vue-springbud",
+  "description": "rxjs elevator demo",
+  "keywords": ["reactive", "rx", "elevator"],
+  "name": "rx-elevator-demo",
   "license": "MIT",
-  "repository": "https://github.com/doodlewind/vue-springbud.git",
-  "version": "0.2.0"
+  "repository": "https://github.com/doodlewind/rx-elevator-demo.git",
+  "version": "1.0.0"
 }

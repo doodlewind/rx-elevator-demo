@@ -1,6 +1,6 @@
-var path = require('path')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const stylConfig = {
   use: ['css-loader', 'stylus-loader'],
@@ -9,7 +9,7 @@ const stylConfig = {
 
 module.exports = {
   generateTemplates: function (entry, htmlPath, isProduction) {
-    var plugins = []
+    const plugins = []
     Object.keys(entry).map(function (entryName) {
       if (entryName !== 'vendor') {
         let htmlName = entryName + '.html'
