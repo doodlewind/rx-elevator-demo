@@ -12,6 +12,7 @@
     "babel-loader": "^6.0.0",
     "babel-preset-es2015": "^6.0.0",
     "cross-env": "^3.0.0",
+    "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.28.0",
     "rimraf": "^2.6.1",
@@ -22,7 +23,11 @@
     "webpack": "^2.2.1"
   },
   "description": "rxjs elevator demo",
-  "keywords": ["reactive", "rx", "elevator"],
+  "keywords": [
+    "reactive",
+    "rx",
+    "elevator"
+  ],
   "name": "rx-elevator-demo",
   "license": "MIT",
   "repository": "https://github.com/doodlewind/rx-elevator-demo.git",
