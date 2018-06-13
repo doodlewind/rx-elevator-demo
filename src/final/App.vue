@@ -1,10 +1,13 @@
 <template>
   <div>
-    <div v-for="(floor, i) in floors" :key="i">
-      <span>{{floors.length - i}}</span>
-      <button @click="command('down', floors.length - i, i)">↓</button>
-      <span :style="{color: floor.up ? 'red' : 'white'}">↑</span>
-      <span :style="{color: floor.down ? 'red' : 'white'}">↓</span>
+    <div class="building">
+      <div class="elevator" :style="{bottom: elevatorHeight}"></div>
+      <div class="floor" v-for="(floor, i) in floors" :key="i">
+        <span>{{floors.length - i}}</span>
+        <button @click="command('down', floors.length - i, i)">↓</button>
+        <span :style="{color: floor.up ? 'red' : 'white'}">↑</span>
+        <span :style="{color: floor.down ? 'red' : 'white'}">↓</span>     
+      </div>
     </div>
     <hr/>
     <div>F{{currFloor}} - {{currDirection}}</div>
@@ -15,6 +18,8 @@
 import Vue from 'vue'
 import EventEmitter from 'events'
 import Elevator from './elevator'
+import '../style/index.css'
+
 const emitter = new EventEmitter()
 
 export default {
@@ -50,6 +55,11 @@ export default {
       ],
       currFloor: 1,
       currDirection: 'stop'
+    }
+  },
+  computed: {
+    elevatorHeight () {
+      return (this.currFloor - 1) * 30 + 'px'
     }
   },
   methods: {
