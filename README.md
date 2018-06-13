@@ -1,12 +1,9 @@
 # Rx Elevator Demo
 Reactive 电梯调度 Demo
 
-## 特性
-- 分步实现的特性 Demo
-- Git Commit Log 中展示了基础特性的迭代历程
+[Blog Post](https://juejin.im/post/59a2d93051882511264e8617)
 
 ## 运行
-本项目配置基于 [vue-springbud](https://github.com/doodlewind/vue-springbud) 生成，基本构建配置请参考其文档。
 
 ```
 npm run dev
