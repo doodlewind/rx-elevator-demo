@@ -11,13 +11,13 @@
 
 <script>
 import EventEmitter from 'events'
-import { getStream } from './stream'
+import Elevator from './elevator'
 const emitter = new EventEmitter()
 
 export default {
   created () {
-    const stream = getStream(emitter, 'click')
-    stream.subscribe(val => this.currentFloor = val)
+    const elevator = Elevator(emitter, 'click')
+    elevator.subscribe(val => this.currentFloor = val)
   },
   data () {
     return { currentFloor: 1 }

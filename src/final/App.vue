@@ -14,13 +14,13 @@
 <script>
 import Vue from 'vue'
 import EventEmitter from 'events'
-import { getStream } from './stream'
+import Elevator from './elevator'
 const emitter = new EventEmitter()
 
 export default {
   created () {
-    const stream = getStream(emitter, 'click')
-    stream.subscribe(({ floor, direction }) => {
+    const elevator = Elevator(emitter, 'click')
+    elevator.subscribe(({ floor, direction }) => {
       this.currFloor = floor
       this.currDirection = direction
 

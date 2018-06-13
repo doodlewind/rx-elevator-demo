@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "rxjs": "^5.4.2",
+    "rxjs": "^6.2.1",
     "vue": "^2.3.4"
   },
   "scripts": {

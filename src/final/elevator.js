@@ -1,4 +1,5 @@
-import { Observable } from 'rxjs'
+import { interval, fromEvent, concat } from 'rxjs'
+import { map, take, switchMap, filter } from 'rxjs/operators'
 
 function getMaxTargetFloor (floors) {
   let maxTargetFloor = 0
@@ -8,35 +9,35 @@ function getMaxTargetFloor (floors) {
   return maxTargetFloor
 }
 
-export function getStream (emitter, type) {
-  return Observable
-    .fromEvent(emitter, type)
-    .filter(({ floors, targetFloor, currFloor, currDirection }) => {
+export default function Elevator (emitter, type) {
+  return fromEvent(emitter, type).pipe(
+    filter(({ floors, targetFloor, currFloor, currDirection }) => {
       if (currDirection === 'down') return false
       else if (currDirection === 'up' && targetFloor <= currFloor) {
         return false
       } else return true
-    })
-    .switchMap(({ floors, targetFloor, currFloor, currDirection }) => {
+    }),
+    switchMap(({ floors, targetFloor, currFloor, currDirection }) => {
       const maxTargetFloor = getMaxTargetFloor(floors)
       const baseFloor = currFloor
-      const up = Observable
-        .interval(1000)
-        .map(count => {
+      const up = interval(1000).pipe(
+        map(count => {
           const newFloor = count + baseFloor
           return { floor: newFloor, direction: 'up' }
-        })
-        .take(maxTargetFloor + 1 - baseFloor)
-      const down = Observable
-        .interval(1000)
-        .map(count => {
+        }),
+        take(maxTargetFloor + 1 - baseFloor)
+      )
+      const down = interval(1000).pipe(
+        map(count => {
           const newFloor = maxTargetFloor - count
           return {
             floor: newFloor,
             direction: newFloor !== 1 ? 'down' : 'stop'
           }
-        })
-        .take(maxTargetFloor)
-      return up.concat(down)
+        }),
+        take(maxTargetFloor)
+      )
+      return concat(up, down)
     })
+  )
 }
