@@ -6,6 +6,9 @@ export default defineConfig({
   title: 'Rx 电梯学院',
   description: '用一座真实电梯，由浅入深地建立 RxJS 的思维模型',
   lang: 'zh-CN',
+  // 部署在 GitHub Pages 项目页（doodlewind.github.io/rx-elevator-demo/）下，
+  // 需要带上仓库名作为基路径，资源与内链才能正确解析。
+  base: '/rx-elevator-demo/',
   cleanUrls: true,
   lastUpdated: true,
   vite: {
