@@ -1,0 +1,20 @@
+:root {
+  --vp-c-brand-1: #2f6df0;
+  --vp-c-brand-2: #4f86f5;
+  --vp-c-brand-3: #6a99f7;
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(120deg, #2f6df0, #21c0a8);
+}
+
+/* 让课程里的交互组件与正文有呼吸感 */
+.vp-doc .runner,
+.vp-doc .player,
+.vp-doc .playground {
+  margin-block: 1.4rem;
+}
+
+/* 操作符名在正文里高亮 */
+.vp-doc code.op {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
