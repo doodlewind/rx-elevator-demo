@@ -1,38 +1,40 @@
 {
-  "dependencies": {
-    "rxjs": "^6.2.1",
-    "vue": "^2.3.4"
-  },
-  "scripts": {
-    "dev": "http-server -p 10000 & webpack --config build/config.js --watch",
-    "build": "cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules"
-  },
-  "devDependencies": {
-    "babel-core": "^6.0.0",
-    "babel-loader": "^6.0.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "cross-env": "^3.0.0",
-    "css-loader": "^0.28.11",
-    "extract-text-webpack-plugin": "^2.1.2",
-    "file-loader": "^0.9.0",
-    "html-webpack-plugin": "^2.28.0",
-    "rimraf": "^2.6.1",
-    "style-loader": "^0.21.0",
-    "url-loader": "^0.5.8",
-    "vue-hot-reload-api": "^2.0.11",
-    "vue-loader": "^10.0.0",
-    "vue-template-compiler": "^2.1.0",
-    "webpack": "^2.2.1"
-  },
-  "description": "rxjs elevator demo",
+  "name": "rx-elevator-demo",
+  "version": "2.0.0",
+  "description": "由浅入深、用电梯调度真实场景直观教学 RxJS 思维模型的交互式教程与 playground",
+  "type": "module",
+  "license": "MIT",
   "keywords": [
     "reactive",
-    "rx",
-    "elevator"
+    "rxjs",
+    "elevator",
+    "tutorial",
+    "vue3",
+    "vite",
+    "vitepress",
+    "marble-diagram"
   ],
-  "name": "rx-elevator-demo",
-  "license": "MIT",
   "repository": "https://github.com/doodlewind/rx-elevator-demo.git",
-  "version": "1.0.0"
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "rxjs": "^7.8.1",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/state": "^6.4.1",
+    "@codemirror/view": "^6.34.1",
+    "@types/node": "^22.10.2",
+    "codemirror": "^6.0.1",
+    "typescript": "^5.7.2",
+    "vitepress": "^1.5.0",
+    "vitest": "^2.1.8",
+    "vue-tsc": "^2.1.10"
+  }
 }
